@@ -33,3 +33,5 @@ cat ./.jitsi-meet-cfg/web/config.js.tmp | sed \
 
 diff ./.jitsi-meet-cfg/web/config.js ./.jitsi-meet-cfg/web/config.js.origin
 
+
+sed -i "s# 'sharedvideo',# /\*'sharedvideo'\*/,#"
