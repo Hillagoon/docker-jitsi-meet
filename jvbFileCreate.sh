@@ -161,6 +161,13 @@ echo ""
 
 rm -rf ../$JVB_FOLDER
 rm -rf ./.jitsi-meet-cfg/
+
+ignorelist=`grep '.jitsi-meet-cfg/' .gitignore`
+if [ -z $ignorelist ]
+then
+	echo '.jitsi-meet-cfg/' >> .gitignore
+fi
+
 cp env.example .env
 cp .env .env.tmp
 cat .env.tmp | sed 's/CONFIG=.*/CONFIG=\.\/\.jitsi-meet-cfg/' | sed -e "s/HTTP_PORT=.*/HTTP_PORT=$HTTP_PORT/g" -e "s/HTTPS_PORT=.*/HTTPS_PORT=$HTTPS_PORT/g" -e "s/TZ=.*/TZ=Asia\/Seoul/g" -e "s/#ENABLE_HTTP_REDIRECT=.*/ENABLE_HTTP_REDIRECT=1/g" -e "s/#PUBLIC_URL=.*/PUBLIC_URL=$DNS_DOMAIN/g" -e "s/meet.jitsi/$DNS_DOMAIN/g" -e "s/#ENABLE_AUTH=.*/ENABLE_AUTH=1/g" > .env
@@ -323,7 +330,6 @@ echo "
         git init
         git remote add docker-jitsi-meet https://github.com/$username/docker-jitsi-meet
         git add .
-        git add .jitsi-meet-cfg
         git commit -m \"JVB Component has been Move to https://github.com/$username/docker-jitsi-jvb\"
         git push docker-jitsi-meet master
         git remote remove docker-jitsi-meet
