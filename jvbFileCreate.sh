@@ -221,7 +221,6 @@ services:
             - JVB_ENABLE_APIS
             - TZ
             - PUBLIC_URL
-            - XMPP_AUTH_DOMAIN
             - XMPP_MUC_DOMAIN
         networks:
             meet.jitsi:
